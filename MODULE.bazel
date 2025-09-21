@@ -6,11 +6,11 @@ module(
 # -----------------------------
 # Local repo
 # -----------------------------
-bazel_dep(name = "genrule_example", version = "0.1.0")
-local_path_override(
-    module_name = "genrule_example",
-    path = "examples/genrule",
-)
+#bazel_dep(name = "genrule_example", version = "0.1.0")
+#local_path_override(
+#    module_name = "genrule_example",
+#    path = "examples/genrule",
+#)
 # -----------------------------
 # Core dependencies (from BCR if available)
 # -----------------------------
