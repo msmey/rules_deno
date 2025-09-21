@@ -25,12 +25,8 @@ bazel_dep(name = "aspect_rules_lint", version = "1.7.0")
 # -----------------------------
 # Aspect rules_deno setup
 # -----------------------------
-use_extension("@aspect_rules_deno//deno:extensions.bzl", "rules_deno")
-use_repo(
-    "@aspect_rules_deno//deno:extensions.bzl", 
-    "deno_toolchains",
-)
-
+deno_ext = use_extension("@aspect_rules_deno//deno:extensions.bzl", "rules_deno")
+use_repo(deno_ext, "deno_toolchains")
 # -----------------------------
 # Go rules setup
 # -----------------------------
