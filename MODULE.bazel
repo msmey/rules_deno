@@ -21,7 +21,6 @@ bazel_dep(name = "buildifier_prebuilt", version = "8.2.0.2")
 bazel_dep(name = "stardoc", version = "0.8.0")
 bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "aspect_rules_lint", version = "1.7.0")
-bazel_dep(name = "aspect_rules_deno", version = "0.3.1")  # example, match your repo’s release
 
 # -----------------------------
 # Aspect rules_deno setup
