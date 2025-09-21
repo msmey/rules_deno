@@ -1,0 +1,71 @@
+module(
+    name = "aspect_rules_deno",
+    version = "0.3.1",
+)
+
+# -----------------------------
+# Local repo
+# -----------------------------
+module_path(
+    name = "genrule_example",
+    path = "examples/genrule",
+)
+
+# -----------------------------
+# Core dependencies (from BCR if available)
+# -----------------------------
+bazel_dep(name = "bazel_skylib", version = "1.8.1")
+bazel_dep(name = "rules_go", version = "0.57.0")
+bazel_dep(name = "gazelle", version = "0.45.0")
+bazel_dep(name = "buildifier_prebuilt", version = "8.2.0.2")
+bazel_dep(name = "stardoc", version = "0.8.0")
+bazel_dep(name = "rules_jvm_external", version = "6.8")
+bazel_dep(name = "aspect_rules_lint", version = "1.7.0")
+bazel_dep(name = "aspect_rules_deno", version = "0.3.1")  # example, match your repo’s release
+
+# -----------------------------
+# Aspect rules_deno setup
+# -----------------------------
+use_extension("@aspect_rules_deno//deno:extensions.bzl", "rules_deno")
+use_repo(
+    "@aspect_rules_deno//deno:extensions.bzl", 
+    "deno_toolchains",
+)
+
+# -----------------------------
+# Go rules setup
+# -----------------------------
+use_extension("@rules_go//go:extensions.bzl", "go")
+go = use_extension("@rules_go//go:extensions.bzl", "go")
+go.toolchain(version = "1.21.6")
+
+# -----------------------------
+# Gazelle
+# -----------------------------
+use_extension("@gazelle//:extensions.bzl", "gazelle")
+
+# -----------------------------
+# Buildifier
+# -----------------------------
+use_extension("@buildifier_prebuilt//:extensions.bzl", "buildifier")
+
+# -----------------------------
+# Stardoc
+# -----------------------------
+use_extension("@stardoc//:extensions.bzl", "stardoc")
+
+# -----------------------------
+# JVM External
+# -----------------------------
+use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install()
+
+# -----------------------------
+# Lint (shfmt, terraform)
+# -----------------------------
+use_extension("@aspect_rules_lint//format:extensions.bzl", "format")
+format = use_extension("@aspect_rules_lint//format:extensions.bzl", "format")
+format.fetch_shfmt()
+format.fetch_terraform()
+
